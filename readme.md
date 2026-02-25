@@ -56,10 +56,14 @@ npm run dev
 
 ## 📚 Documentação
 
+### Backend
 - [Especificação do Backend](docs/BACKEND_SPEC.md) - Regras de negócio e arquitetura
 - [Setup do Backend](docs/BACKEND_SETUP.md) - Como executar o backend
 - [Progresso do Backend](docs/BACKEND_PROGRESS.md) - Status da implementação
+
+### Frontend
 - [Especificação do Frontend](docs/FRONTEND_SPEC.md) - Design system e UI/UX
+- [Setup do Frontend](docs/FRONTEND_SETUP.md) - Como executar o frontend
 
 ## 🛠️ Tecnologias
 
