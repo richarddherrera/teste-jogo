@@ -2,6 +2,10 @@ package com.arena.model;
 
 import com.arena.enums.Categoria;
 import com.arena.enums.StatusJogador;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -11,16 +15,40 @@ import java.util.Objects;
 /**
  * Representa um jogador no sistema de torneios.
  */
+@Entity
+@Table(name = "jogadores")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Jogador extends Participante {
     private static final int ELO_INICIAL = 1000;
     private static final int ELO_MINIMO = 0;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
     private String nickname;
+
+    @Column(nullable = false)
     private String nomeReal;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private LocalDate dataNascimento;
-    private int elo;
-    private StatusJogador status;
+
+    @Column(nullable = false)
+    private int elo = ELO_INICIAL;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatusJogador status = StatusJogador.ATIVO;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Categoria categoria;
 
     public Jogador(String nickname, String nomeReal, String email, LocalDate dataNascimento) {
@@ -110,39 +138,6 @@ public class Jogador extends Participante {
     @Override
     public List<Jogador> getMembros() {
         return Collections.singletonList(this);
-    }
-
-    // Getters e Setters
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getNomeReal() {
-        return nomeReal;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public int getElo() {
-        return elo;
-    }
-
-    public StatusJogador getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusJogador status) {
-        this.status = status;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
     }
 
     @Override
