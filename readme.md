@@ -1,3 +1,22 @@
+## Testes
+
+O projeto contém alguns testes básicos do backend que garantem que o contexto do
+Spring carrega e que as rotas de `jogadores` e `times` retornam OK. Para executar
+os testes basta rodar:
+
+```powershell
+mvn test
+```
+
+Os resultados aparecem na saída e o Maven exibirá `BUILD SUCCESS` quando todos
+passarem (atualmente são 3 testes simples).
+
+## Documentação de API (Swagger)
+
+Após iniciar o back-end, abra `http://localhost:8080/swagger-ui/index.html` para
+explorar todos os endpoints (autenticação, jogadores, times, torneios...). A UI
+é gerada automaticamente pelo `springdoc-openapi` que já está incluído no
+`pom.xml`.
 # Arena Nexus
 
 Arena Nexus é um sistema de gerenciamento de torneios de e-sports, desenvolvido
