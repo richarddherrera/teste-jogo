@@ -5,10 +5,6 @@ package com.arena.exception;
  */
 public class InscricaoFechadaException extends RuntimeException {
     
-    public InscricaoFechadaException(String message) {
-        super(message);
-    }
-    
     public InscricaoFechadaException(String nomeTorneio) {
         super(String.format("As inscrições para o torneio '%s' estão fechadas", nomeTorneio));
     }

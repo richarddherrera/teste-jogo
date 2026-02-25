@@ -5,10 +5,6 @@ package com.arena.exception;
  */
 public class TorneioLotadoException extends RuntimeException {
     
-    public TorneioLotadoException(String message) {
-        super(message);
-    }
-    
     public TorneioLotadoException(String nomeTorneio, int maxParticipantes) {
         super(String.format("Torneio '%s' já atingiu o limite de %d participantes", 
             nomeTorneio, maxParticipantes));

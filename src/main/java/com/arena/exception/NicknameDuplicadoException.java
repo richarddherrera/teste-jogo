@@ -5,10 +5,6 @@ package com.arena.exception;
  */
 public class NicknameDuplicadoException extends RuntimeException {
     
-    public NicknameDuplicadoException(String message) {
-        super(message);
-    }
-    
     public NicknameDuplicadoException(String nickname) {
         super(String.format("Já existe um jogador cadastrado com o nickname '%s'", nickname));
     }

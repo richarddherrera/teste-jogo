@@ -5,10 +5,6 @@ package com.arena.exception;
  */
 public class JogadorBanidoException extends RuntimeException {
     
-    public JogadorBanidoException(String message) {
-        super(message);
-    }
-    
     public JogadorBanidoException(String nickname, String acao) {
         super(String.format("Jogador '%s' está banido e não pode %s", nickname, acao));
     }

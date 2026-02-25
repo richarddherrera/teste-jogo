@@ -5,10 +5,6 @@ package com.arena.exception;
  */
 public class TimeIncompletoException extends RuntimeException {
     
-    public TimeIncompletoException(String message) {
-        super(message);
-    }
-    
     public TimeIncompletoException(String nomeTime, String motivo) {
         super(String.format("Time '%s' está incompleto: %s", nomeTime, motivo));
     }
