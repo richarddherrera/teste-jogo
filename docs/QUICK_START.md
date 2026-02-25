@@ -29,7 +29,6 @@ npm -version     # Deve mostrar npm
 Abra um terminal na raiz do projeto:
 
 ```bash
-# Compilar e executar
 mvn spring-boot:run
 ```
 
@@ -140,8 +139,8 @@ Content-Type: application/json
 # Compilar sem executar
 mvn clean compile
 
-# Executar testes
-mvn test
+# Executar
+mvn spring-boot:run
 
 # Gerar JAR
 mvn clean package
@@ -267,7 +266,6 @@ Agora que está tudo funcionando:
 - 📖 [Documentação do Backend](BACKEND_SPEC.md)
 - 🎨 [Documentação do Frontend](FRONTEND_SPEC.md)
 - 💾 [Configuração do Banco de Dados](DATABASE_SETUP.md)
-- 🐛 [Troubleshooting](BACKEND_SETUP.md)
 
 ---
 

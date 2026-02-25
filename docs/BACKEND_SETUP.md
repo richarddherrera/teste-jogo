@@ -1,9 +1,9 @@
-# Como Executar o Projeto
+# Como Executar o Backend (API REST)
 
 ## Pré-requisitos
 
 - Java 17 ou superior instalado
-- Maven instalado (ou usar o wrapper incluído)
+- Maven instalado
 
 ## Verificar Instalação
 
@@ -12,72 +12,55 @@ java -version
 mvn -version
 ```
 
-## Compilar o Projeto
+## Executar a API
 
 ```cmd
-mvn clean compile
+mvn spring-boot:run
 ```
 
-## Executar a Aplicação
+A API estará disponível em: `http://localhost:8080`
 
-```cmd
-mvn exec:java -Dexec.mainClass="com.arena.ArenaApp"
-```
+## Endpoints Disponíveis
 
-Ou compile e execute manualmente:
+### Jogadores
 
-```cmd
-mvn clean package
-java -cp target/esports-tournament-system-1.0.0.jar com.arena.ArenaApp
-```
+- `GET /api/jogadores` - Lista todos os jogadores
+- `GET /api/jogadores/{nickname}` - Busca jogador por nickname
+- `POST /api/jogadores` - Cria novo jogador
+- `GET /api/jogadores/ranking` - Retorna top 10
+- `PATCH /api/jogadores/{nickname}/elo` - Atualiza ELO
+- `DELETE /api/jogadores/{nickname}` - Remove jogador
 
 ## Dados Iniciais
 
-O sistema já vem com dados de exemplo carregados:
+O sistema carrega automaticamente 5 jogadores de exemplo:
 
-- 4 jogadores (aspas, Less, Sacy, pANcada)
-- 1 time (LOUD)
-- 3 jogos (Valorant, League of Legends, CS:GO)
-- 1 torneio (Champions 2024)
+- aspas (ELO 1600 - DIAMANTE)
+- pANcada (ELO 1800 - DIAMANTE)
+- Less (ELO 1400 - OURO)
+- tuyz (ELO 1200 - OURO)
+- Sacy (ELO 1000 - PRATA)
 
-## Estrutura do Menu
+## Console H2 Database
 
-1. 👤 Gerenciar Jogadores
-2. 👥 Gerenciar Times
-3. 🎮 Gerenciar Jogos
-4. 🏆 Gerenciar Torneios
-5. ⚔️ Gerenciar Partidas
-6. 🎯 Matchmaking
-7. 📊 Relatórios e Rankings
+Acesse: `http://localhost:8080/h2-console`
 
-## Exemplos de Uso
-
-### Cadastrar um Novo Jogador
-
-1. Menu Principal → 1 (Jogadores)
-2. Opção 1 (Cadastrar)
-3. Preencher dados
-
-### Inscrever no Torneio
-
-1. Menu Principal → 4 (Torneios)
-2. Opção 3 (Inscrever Participante)
-3. Nome do torneio: Champions 2024
-4. Tipo: jogador ou time
-
-### Ver Ranking
-
-1. Menu Principal → 7 (Relatórios)
-2. Opção 1 (Ranking Global)
+Configuração:
+- **JDBC URL:** `jdbc:h2:mem:arena_nexus`
+- **Username:** `sa`
+- **Password:** (deixe vazio)
 
 ## Troubleshooting
 
-Se encontrar erro de compilação, certifique-se de estar usando Java 17+:
+### Porta 8080 em uso
 
 ```cmd
-java -version
+netstat -ano | findstr :8080
+taskkill /PID <numero_do_pid> /F
 ```
 
-Se o Maven não estiver no PATH, use o caminho completo ou instale via:
-- Windows: Chocolatey (`choco install maven`)
-- Ou baixe de: https://maven.apache.org/download.cgi
+### Erro de compilação
+
+```cmd
+mvn clean install
+```
