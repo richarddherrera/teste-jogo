@@ -1,6 +1,11 @@
 package com.arena.controller;
 
 import com.arena.model.Time;
+import com.arena.model.Jogador;
+import com.arena.model.Jogo;
+import com.arena.enums.GeneroJogo;
+import com.arena.enums.Plataforma;
+import java.time.LocalDate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

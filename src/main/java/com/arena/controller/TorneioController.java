@@ -32,16 +32,14 @@ public class TorneioController {
         try {
             // construímos rapidamente objetos necessários
             Jogo jogo = new Jogo("Valorant", GeneroJogo.FPS, 5, Plataforma.PC);
-            Torneio t = new Torneio(
+                // usando construtor simplificado que define status/premio e listas internamente
+                Torneio t = new Torneio(
                     "Torneio Exemplo",
                     jogo,
                     FormatoTorneio.ELIMINACAO_SIMPLES,
                     LocalDate.now().plusDays(7),
                     LocalDate.now().plusDays(8),
-                    StatusTorneio.INSCRICOES_ABERTAS,
-                    5000,
-                    new ArrayList<>(),
-                    new ArrayList<>());
+                    5000);
             torneios.add(t);
         } catch (Exception e) {
             // se algo falhar não atrapalha a inicialização
