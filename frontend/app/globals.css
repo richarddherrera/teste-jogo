@@ -3,17 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-  }
-
   * {
-    @apply border-border;
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   body {
-    @apply bg-background-primary text-foreground antialiased;
+    @apply bg-background-primary text-white antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -24,57 +19,92 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-background-secondary;
+    background: #111827;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-neon-blue/30 rounded-full;
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-neon-blue/50;
+    background: rgba(59, 130, 246, 0.5);
   }
 }
 
 @layer components {
   /* Glass morphism effect */
   .glass {
-    @apply bg-background-glass backdrop-blur-md border border-white/10;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .glass-strong {
-    @apply bg-background-glass backdrop-blur-xl border border-white/20;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   /* Neon glow effects */
   .glow-blue {
-    @apply shadow-neon-blue;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
   }
 
   .glow-cyan {
-    @apply shadow-neon-cyan;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
   }
 
   .glow-purple {
-    @apply shadow-neon-purple;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
   }
 
   /* Button styles */
   .btn-primary {
-    @apply px-6 py-3 bg-neon-blue hover:bg-neon-cyan text-white font-semibold rounded-lg transition-all duration-300 glow-blue hover:glow-cyan;
+    @apply px-6 py-3 text-white font-semibold rounded-lg transition-all duration-300;
+    background: #3b82f6;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+
+  .btn-primary:hover {
+    background: #00d2ff;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
   }
 
   .btn-secondary {
-    @apply px-6 py-3 glass hover:glass-strong text-white font-semibold rounded-lg transition-all duration-300;
+    @apply px-6 py-3 text-white font-semibold rounded-lg transition-all duration-300;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .btn-danger {
-    @apply px-6 py-3 bg-status-danger hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300;
+    @apply px-6 py-3 text-white font-semibold rounded-lg transition-all duration-300;
+    background: #991b1b;
+  }
+
+  .btn-danger:hover {
+    background: #b91c1c;
   }
 
   /* Card styles */
   .card {
-    @apply glass rounded-xl p-6 transition-all duration-300 hover:glass-strong;
+    @apply rounded-xl p-6 transition-all duration-300;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card:hover {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .card-rank {
@@ -83,32 +113,43 @@
 
   /* Text gradients */
   .text-gradient-blue {
-    @apply bg-gradient-to-r from-neon-blue to-neon-cyan bg-clip-text text-transparent;
+    background: linear-gradient(to right, #3b82f6, #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .text-gradient-purple {
-    @apply bg-gradient-to-r from-neon-purple to-neon-violet bg-clip-text text-transparent;
+    background: linear-gradient(to right, #a855f7, #bf5af2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* Rank badges */
   .rank-bronze {
-    @apply text-rank-bronze glow-blue;
+    color: #cd7f32;
+    box-shadow: 0 0 20px rgba(205, 127, 50, 0.5);
   }
 
   .rank-silver {
-    @apply text-rank-silver glow-cyan;
+    color: #c0c0c0;
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
   }
 
   .rank-gold {
-    @apply text-rank-gold glow-blue;
+    color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
   }
 
   .rank-diamond {
-    @apply text-rank-diamond glow-cyan;
+    color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
   }
 
   .rank-master {
-    @apply text-rank-master glow-purple;
+    color: #7c3aed;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
   }
 }
 
