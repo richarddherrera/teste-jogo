@@ -35,26 +35,30 @@ arena-nexus/
 
 ## 🚀 Quick Start
 
-### Backend (Java)
+### Iniciar Backend (API)
 
 ```bash
-# Compilar e executar
-mvn compile exec:java
-
-# Ou executar o JAR
-mvn clean package
-java -jar target/esports-tournament-system-1.0.0.jar
+mvn spring-boot:run
 ```
 
-### Frontend (Next.js)
+Acesse: `http://localhost:8080`
+
+### Iniciar Frontend
 
 ```bash
 cd frontend
-npm install
+npm install  # Primeira vez apenas
 npm run dev
 ```
 
+Acesse: `http://localhost:3000`
+
+📖 **Guia completo:** [Quick Start Guide](docs/QUICK_START.md)
+
 ## 📚 Documentação
+
+### 🚀 Início Rápido
+- **[Quick Start Guide](docs/QUICK_START.md)** - Comece aqui! Guia de 5 minutos
 
 ### Backend
 - [Especificação do Backend](docs/BACKEND_SPEC.md) - Regras de negócio e arquitetura
@@ -65,14 +69,19 @@ npm run dev
 - [Especificação do Frontend](docs/FRONTEND_SPEC.md) - Design system e UI/UX
 - [Setup do Frontend](docs/FRONTEND_SETUP.md) - Como executar o frontend
 
+### Banco de Dados
+- **[Database Setup](docs/DATABASE_SETUP.md)** - Configuração H2 e MySQL
+
 ## 🛠️ Tecnologias
 
 ### Backend
 - Java 17+
+- Spring Boot 3.2
+- Spring Data JPA
+- H2 Database (desenvolvimento)
+- MySQL (produção)
 - Maven
-- Collections Framework
-- Streams API
-- java.time API
+- Lombok
 
 ### Frontend
 - Next.js 14+
@@ -116,12 +125,20 @@ Projeto educacional - Livre para uso e modificação.
 ## 🎯 Roadmap
 
 - [x] Backend Core (Fases 1-7)
-- [ ] Frontend UI (Em desenvolvimento)
-- [ ] API REST com Spring Boot
+- [x] API REST com Spring Boot
+- [x] Banco de Dados (H2 + MySQL)
+- [x] Frontend UI Base
+- [x] Página de Rankings
+- [x] Página de Perfil do Jogador
+- [x] Integração Frontend ↔ Backend
+- [ ] Páginas de Times e Torneios
+- [ ] Sistema de Matchmaking UI
+- [ ] WebSockets para real-time
+- [ ] Dashboard Admin
 - [ ] Integração com Discord Bot
 - [ ] Sistema de temporadas
-- [ ] Bracket visual ASCII
+- [ ] Bracket visual
 
 ---
 
-**Status:** Backend completo ✅ | Frontend em desenvolvimento 🚧
+**Status:** Backend completo ✅ | API REST ✅ | Frontend 40% 🚧
