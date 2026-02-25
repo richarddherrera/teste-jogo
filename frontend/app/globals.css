@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background-primary text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar customization */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neon-blue/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neon-blue/50;
+  }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-background-glass backdrop-blur-md border border-white/10;
+  }
+
+  .glass-strong {
+    @apply bg-background-glass backdrop-blur-xl border border-white/20;
+  }
+
+  /* Neon glow effects */
+  .glow-blue {
+    @apply shadow-neon-blue;
+  }
+
+  .glow-cyan {
+    @apply shadow-neon-cyan;
+  }
+
+  .glow-purple {
+    @apply shadow-neon-purple;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 bg-neon-blue hover:bg-neon-cyan text-white font-semibold rounded-lg transition-all duration-300 glow-blue hover:glow-cyan;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 glass hover:glass-strong text-white font-semibold rounded-lg transition-all duration-300;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 bg-status-danger hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card {
+    @apply glass rounded-xl p-6 transition-all duration-300 hover:glass-strong;
+  }
+
+  .card-rank {
+    @apply card relative overflow-hidden;
+  }
+
+  /* Text gradients */
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-neon-blue to-neon-cyan bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-neon-purple to-neon-violet bg-clip-text text-transparent;
+  }
+
+  /* Rank badges */
+  .rank-bronze {
+    @apply text-rank-bronze glow-blue;
+  }
+
+  .rank-silver {
+    @apply text-rank-silver glow-cyan;
+  }
+
+  .rank-gold {
+    @apply text-rank-gold glow-blue;
+  }
+
+  .rank-diamond {
+    @apply text-rank-diamond glow-cyan;
+  }
+
+  .rank-master {
+    @apply text-rank-master glow-purple;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animation utilities */
+  .animate-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
