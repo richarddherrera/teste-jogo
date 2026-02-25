@@ -8,7 +8,6 @@ import com.arena.model.Jogador;
 import com.arena.repository.JogadorRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +51,7 @@ public class JogadorController {
 
     /**
      * Cria um novo jogador.
+     * NOTA: Este endpoint está deprecado. Use /api/auth/register para criar novos jogadores.
      */
     @PostMapping
     public ResponseEntity<JogadorDTO> criar(@Valid @RequestBody CreateJogadorRequest request) {
@@ -59,10 +59,12 @@ public class JogadorController {
             throw new NicknameDuplicadoException(request.getNickname());
         }
 
+        // Senha padrão para jogadores criados por este endpoint
         Jogador jogador = new Jogador(
             request.getNickname(),
             request.getNomeReal(),
             request.getEmail(),
+            "senhaTemporaria123", // Senha padrão - usuário deve trocar
             request.getDataNascimento()
         );
 

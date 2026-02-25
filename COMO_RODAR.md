@@ -67,6 +67,21 @@ Você verá a página inicial do Arena Nexus! 🎮
 2. **Ver Perfil** - Clique em um jogador para ver detalhes
 3. **Acessar H2 Console** - http://localhost:8080/h2-console para ver o banco de dados
 
+> **🛠 Dica de depuração:** se algum botão de login/cadastro/ranking mostrar
+> "Failed to fetch" ou a mensagem de erro da captura de tela, provavelmente o
+> backend não está ativo ou o endereço base está incorreto. Abra o console do
+> navegador e verifique a linha `[api] base URL:` para ver qual URL o front-end
+> está tentando acessar. Ele deve ser `http://localhost:8080/api` (ou a URL que
+> você definiu em `NEXT_PUBLIC_API_URL`).
+
+> **🔐 Observação sobre autenticação:** as páginas de **Times**, **Torneios** e
+> **Matchmaking** agora são públicas para navegação, mas algumas operações
+> continuam exigindo login. Ao fazer login ou registro, um cookie chamado
+> `authToken` é criado automaticamente; sem ele o middleware redireciona para
+> `/login`. Se você vir o formulário novamente depois de logar, tente limpar os
+> cookies do site e refazer o login (o console deve indicar `[api] base URL:` e
+> `authToken` na aba Application > Cookies).
+
 ---
 
 ## 🛑 Para Parar

@@ -26,10 +26,12 @@ export default function RankingsPage() {
   }
 
   if (error) {
+    // react-query error can be an Error object or something else; normalize message
+    const msg = error instanceof Error ? error.message : "Erro ao carregar rankings";
     return (
       <div className="min-h-screen bg-background-primary flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-400 mb-4">Erro ao carregar rankings</p>
+          <p className="text-red-400 mb-4">{msg}</p>
           <p className="text-gray-500 text-sm">
             Certifique-se de que a API está rodando em http://localhost:8080
           </p>

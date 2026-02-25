@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Trophy, Users, Gamepad2, Swords, Home } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Trophy, Users, Gamepad2, Swords, Home, User, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { jogador, isAuthenticated, logout } = useAuth();
 
   const links = [
     { href: "/", label: "Home", icon: Home },
@@ -16,6 +19,11 @@ export function Navbar() {
     { href: "/torneios", label: "Torneios", icon: Gamepad2 },
     { href: "/matchmaking", label: "Matchmaking", icon: Swords },
   ];
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   return (
     <nav className="glass-strong border-b border-white/10 sticky top-0 z-50">
@@ -62,6 +70,36 @@ export function Navbar() {
                 </Link>
               );
             })}
+          </div>
+
+          {/* User Menu */}
+          <div className="flex items-center gap-3">
+            {isAuthenticated && jogador ? (
+              <>
+                <Link
+                  href={`/jogador/${jogador.nickname}`}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <User className="w-4 h-4 text-cyan-400" />
+                  <span className="text-sm font-medium">{jogador.nickname}</span>
+                  <span className="text-xs text-gray-400">{jogador.categoria}</span>
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors"
+                  title="Sair"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500 hover:opacity-90 transition-opacity font-medium"
+              >
+                Entrar
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}

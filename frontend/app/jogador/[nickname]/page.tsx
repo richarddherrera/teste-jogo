@@ -117,17 +117,64 @@ export default function JogadorPage() {
                 </div>
                 <div className="glass rounded-lg p-4 text-center">
                   <div className="text-3xl font-bold text-green-400 mb-1">
-                    0
+                    {jogador.vitorias}
                   </div>
                   <div className="text-xs text-gray-400">Vitórias</div>
                 </div>
                 <div className="glass rounded-lg p-4 text-center">
                   <div className="text-3xl font-bold text-red-400 mb-1">
-                    0
+                    {jogador.derrotas}
                   </div>
                   <div className="text-xs text-gray-400">Derrotas</div>
                 </div>
+                <div className="glass rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-cyan-400 mb-1">
+                    {jogador.totalPartidas}
+                  </div>
+                  <div className="text-xs text-gray-400">Total Partidas</div>
+                </div>
+                <div className="glass rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-yellow-400 mb-1">
+                    {jogador.kdRatio.toFixed(2)}
+                  </div>
+                  <div className="text-xs text-gray-400">K/D Ratio</div>
+                </div>
+                <div className="glass rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-purple-400 mb-1">
+                    {(jogador.winRate * 100).toFixed(0)}%
+                  </div>
+                  <div className="text-xs text-gray-400">Win Rate</div>
+                </div>
+                <div className="glass rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-orange-400 mb-1">
+                    {Math.floor(jogador.tempoJogoMinutos / 60)}h
+                  </div>
+                  <div className="text-xs text-gray-400">Tempo de Jogo</div>
+                </div>
               </div>
+
+              {/* Detailed Stats */}
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="glass rounded-lg p-4">
+                  <div className="text-sm text-gray-400 mb-2">Abates</div>
+                  <div className="text-2xl font-bold text-green-400">{jogador.kills}</div>
+                </div>
+                <div className="glass rounded-lg p-4">
+                  <div className="text-sm text-gray-400 mb-2">Mortes</div>
+                  <div className="text-2xl font-bold text-red-400">{jogador.deaths}</div>
+                </div>
+                <div className="glass rounded-lg p-4">
+                  <div className="text-sm text-gray-400 mb-2">Assistências</div>
+                  <div className="text-2xl font-bold text-blue-400">{jogador.assists}</div>
+                </div>
+              </div>
+
+              {jogador.modoFavorito && (
+                <div className="mt-4 glass rounded-lg p-4">
+                  <div className="text-sm text-gray-400 mb-1">Modo Favorito</div>
+                  <div className="text-xl font-bold text-cyan-400">{jogador.modoFavorito}</div>
+                </div>
+              )}
             </motion.div>
 
             {/* ELO History Chart Placeholder */}

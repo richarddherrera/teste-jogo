@@ -76,6 +76,16 @@ export interface Jogador {
   elo: number;
   status: StatusJogador;
   categoria: Categoria;
+  totalPartidas: number;
+  vitorias: number;
+  derrotas: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  tempoJogoMinutos: number;
+  modoFavorito?: string;
+  kdRatio: number;
+  winRate: number;
 }
 
 export interface Jogo {

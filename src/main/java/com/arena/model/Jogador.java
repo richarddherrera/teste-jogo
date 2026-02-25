@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -20,7 +19,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Jogador extends Participante {
+public class Jogador {
     private static final int ELO_INICIAL = 1000;
     private static final int ELO_MINIMO = 0;
 
@@ -34,8 +33,11 @@ public class Jogador extends Participante {
     @Column(nullable = false)
     private String nomeReal;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String senha; // Será criptografada
 
     @Column(nullable = false)
     private LocalDate dataNascimento;
@@ -51,16 +53,49 @@ public class Jogador extends Participante {
     @Column(nullable = false)
     private Categoria categoria;
 
-    public Jogador(String nickname, String nomeReal, String email, LocalDate dataNascimento) {
+    // Estatísticas
+    @Column(nullable = false)
+    private int totalPartidas = 0;
+
+    @Column(nullable = false)
+    private int vitorias = 0;
+
+    @Column(nullable = false)
+    private int derrotas = 0;
+
+    @Column(nullable = false)
+    private int kills = 0;
+
+    @Column(nullable = false)
+    private int deaths = 0;
+
+    @Column(nullable = false)
+    private int assists = 0;
+
+    @Column(nullable = false)
+    private long tempoJogoMinutos = 0;
+
+    @Column
+    private String modoFavorito;
+
+    @Column
+    private LocalDateTime ultimoLogin;
+
+    @Column
+    private LocalDateTime dataCriacao;
+
+    public Jogador(String nickname, String nomeReal, String email, String senha, LocalDate dataNascimento) {
         validarCampos(nickname, nomeReal, email, dataNascimento);
         
         this.nickname = nickname;
         this.nomeReal = nomeReal;
         this.email = email;
+        this.senha = senha; // Será criptografada no service
         this.dataNascimento = dataNascimento;
         this.elo = ELO_INICIAL;
         this.status = StatusJogador.ATIVO;
         this.categoria = Categoria.getCategoriaPorElo(this.elo);
+        this.dataCriacao = LocalDateTime.now();
     }
 
     private void validarCampos(String nickname, String nomeReal, String email, LocalDate dataNascimento) {
@@ -80,8 +115,6 @@ public class Jogador extends Participante {
 
     /**
      * Adiciona pontos de ELO ao jogador e atualiza sua categoria.
-     * 
-     * @param pontos quantidade de pontos a adicionar
      */
     public void ganharElo(int pontos) {
         if (pontos < 0) {
@@ -93,9 +126,6 @@ public class Jogador extends Participante {
 
     /**
      * Remove pontos de ELO do jogador e atualiza sua categoria.
-     * O ELO nunca fica negativo.
-     * 
-     * @param pontos quantidade de pontos a remover
      */
     public void perderElo(int pontos) {
         if (pontos < 0) {
@@ -113,31 +143,43 @@ public class Jogador extends Participante {
     }
 
     /**
-     * Verifica se o jogador está banido.
-     * 
-     * @return true se o jogador está banido
+     * Registra uma vitória.
      */
+    public void registrarVitoria() {
+        this.totalPartidas++;
+        this.vitorias++;
+    }
+
+    /**
+     * Registra uma derrota.
+     */
+    public void registrarDerrota() {
+        this.totalPartidas++;
+        this.derrotas++;
+    }
+
+    /**
+     * Calcula o K/D ratio.
+     */
+    public double getKdRatio() {
+        if (deaths == 0) return kills;
+        return (double) kills / deaths;
+    }
+
+    /**
+     * Calcula o win rate.
+     */
+    public double getWinRate() {
+        if (totalPartidas == 0) return 0.0;
+        return (double) vitorias / totalPartidas;
+    }
+
     public boolean isBanido() {
         return this.status == StatusJogador.BANIDO;
     }
 
-    /**
-     * Verifica se o jogador está ativo.
-     * 
-     * @return true se o jogador está ativo
-     */
     public boolean isAtivo() {
         return this.status == StatusJogador.ATIVO;
-    }
-
-    @Override
-    public String getNome() {
-        return nickname;
-    }
-
-    @Override
-    public List<Jogador> getMembros() {
-        return Collections.singletonList(this);
     }
 
     @Override

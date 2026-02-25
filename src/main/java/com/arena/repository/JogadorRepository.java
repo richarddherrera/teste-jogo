@@ -17,6 +17,8 @@ public interface JogadorRepository extends JpaRepository<Jogador, Long> {
     
     Optional<Jogador> findByNickname(String nickname);
     
+    Optional<Jogador> findByEmail(String email);
+    
     boolean existsByNickname(String nickname);
     
     List<Jogador> findByCategoria(Categoria categoria);

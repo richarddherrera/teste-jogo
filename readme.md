@@ -1,144 +1,77 @@
-# Arena Nexus - Sistema de Gerenciamento de Torneios de E-Sports
+# Arena Nexus
 
-Sistema completo de gerenciamento de torneios de e-sports com backend Java e frontend React/Next.js.
+Arena Nexus é um sistema de gerenciamento de torneios de e-sports, desenvolvido
+como projeto full‑stack com **Java/Spring Boot** no back‑end e **Next.js/TypeScript**
+no front‑end. A aplicação mantém autenticação via JWT, ranking de jogadores,
+times, torneios e um protótipo de fila de matchmaking.
 
-## 🎮 Visão Geral
+## Tecnologias
 
-Arena Nexus é uma plataforma profissional para gerenciamento de torneios, jogadores, times e rankings no universo dos esportes eletrônicos. O sistema oferece:
-
-- Sistema de ELO dinâmico com categorias automáticas
-- Matchmaking inteligente por categoria
-- Gestão completa de torneios e partidas
-- Sistema de penalidades e moderação
-- Rankings e estatísticas em tempo real
-- Interface moderna com "Pro-Circuit Aesthetic"
-
-## 📁 Estrutura do Projeto
-
-```
-arena-nexus/
-├── src/main/java/          # Backend Java
-│   └── com.arena/
-│       ├── model/          # Entidades do domínio
-│       ├── enums/          # Enumerações
-│       ├── service/        # Lógica de negócio
-│       ├── exception/      # Exceções customizadas
-│       └── ArenaApp.java   # Aplicação CLI
-├── frontend/               # Frontend Next.js (em desenvolvimento)
-├── docs/                   # Documentação
-│   ├── BACKEND_SPEC.md     # Especificação do backend
-│   ├── BACKEND_SETUP.md    # Como executar o backend
-│   ├── BACKEND_PROGRESS.md # Progresso da implementação
-│   └── FRONTEND_SPEC.md    # Especificação do frontend
-└── pom.xml                 # Configuração Maven
-```
-
-## 🚀 Quick Start
-
-### Iniciar Backend (API)
-
-```bash
-mvn spring-boot:run
-```
-
-Acesse: `http://localhost:8080`
-
-### Iniciar Frontend
-
-```bash
-cd frontend
-npm install  # Primeira vez apenas
-npm run dev
-```
-
-Acesse: `http://localhost:3000`
-
-📖 **Guia completo:** [Quick Start Guide](docs/QUICK_START.md)
-
-## 📚 Documentação
-
-### 🚀 Início Rápido
-- **[Quick Start Guide](docs/QUICK_START.md)** - Comece aqui! Guia de 5 minutos
-
-### Backend
-- [Especificação do Backend](docs/BACKEND_SPEC.md) - Regras de negócio e arquitetura
-- [Setup do Backend](docs/BACKEND_SETUP.md) - Como executar o backend
-- [Progresso do Backend](docs/BACKEND_PROGRESS.md) - Status da implementação
-
-### Frontend
-- [Especificação do Frontend](docs/FRONTEND_SPEC.md) - Design system e UI/UX
-- [Setup do Frontend](docs/FRONTEND_SETUP.md) - Como executar o frontend
-
-### Banco de Dados
-- **[Database Setup](docs/DATABASE_SETUP.md)** - Configuração H2 e MySQL
-
-## 🛠️ Tecnologias
-
-### Backend
-- Java 17+
+- Java 17
 - Spring Boot 3.2
-- Spring Data JPA
-- H2 Database (desenvolvimento)
-- MySQL (produção)
-- Maven
-- Lombok
-
-### Frontend
-- Next.js 14+
-- React 18+
+  - Web MVC, Data JPA (com H2 em memória), Validation, Security
+  - Springdoc OpenAPI para documentação Swagger
+- Lombok (geração automatizada de getters/setters)
+- H2 Database (desenvolvimento) / MySQL driver
+- React 18 / Next.js 14 (App Router)
 - TypeScript
-- Tailwind CSS v4
-- Framer Motion
-- TanStack Query
-- Recharts
+- Tailwind CSS, Framer Motion, Lucide para ícones
+- React Query (tanstack) para cache de dados
 
-## ✨ Features Principais
+## Como rodar
 
-### Sistema de ELO
-- Categorias: Bronze, Prata, Ouro, Diamante, Mestre
-- Cálculo automático baseado em vitórias/derrotas
-- Distribuição de pontos para times
+Abra dois terminais:
 
-### Matchmaking
-- Fila FIFO com filtro por categoria
-- Pareamento inteligente (±1 categoria)
-- Sistema de aceite de partida
+1. **Back-end** (na raiz do repositório):
 
-### Torneios
-- Múltiplos formatos (Eliminação Simples, Dupla, Pontos Corridos, Grupos)
-- Sistema de inscrições com validações
-- Premiação automática (50/30/20)
+	```powershell
+	mvn spring-boot:run
+	```
 
-### Moderação
-- Sistema de penalidades
-- Ban automático após 3 penalidades
-- Registro de WO (walkover)
+	O servidor inicializa em `http://localhost:8080` e disponibiliza o console H2
+	em `http://localhost:8080/h2-console`.
 
-## 👥 Contribuindo
+2. **Front-end**:
 
-Este é um projeto educacional para prática de Java OOP e desenvolvimento full-stack.
+	```powershell
+	cd frontend
+	npm install      # se ainda não tiver instalado
+	npm run dev
+	```
 
-## 📄 Licença
+	O site ficará disponível em `http://localhost:3000`.
 
-Projeto educacional - Livre para uso e modificação.
+> Se a API não estiver disponível o front exibirá erros como "Failed to fetch"
+> no console. Verifique a variável `NEXT_PUBLIC_API_URL` em
+> `frontend/.env.local` ou veja o log `[api] base URL:` no console do navegador.
 
-## 🎯 Roadmap
+## Fluxo básico
 
-- [x] Backend Core (Fases 1-7)
-- [x] API REST com Spring Boot
-- [x] Banco de Dados (H2 + MySQL)
-- [x] Frontend UI Base
-- [x] Página de Rankings
-- [x] Página de Perfil do Jogador
-- [x] Integração Frontend ↔ Backend
-- [ ] Páginas de Times e Torneios
-- [ ] Sistema de Matchmaking UI
-- [ ] WebSockets para real-time
-- [ ] Dashboard Admin
-- [ ] Integração com Discord Bot
-- [ ] Sistema de temporadas
-- [ ] Bracket visual
+1. Cadastre um jogador ou use as contas de teste (`aspas`/`senha123`, `Less`/`senha123`).
+2. Faça login; o sistema retorna um JWT que é gravado em cookie e localStorage.
+3. Navegue pelo menu em `/rankings`, `/times`, `/torneios` e `/matchmaking`.
+4. A API expõe endpoints REST sob `/api/*`; veja a documentação Swagger em
+	`http://localhost:8080/swagger-ui/index.html`.
+
+## Estrutura de pastas
+
+- `src/main/java/com/arena`: código Java (controllers, modelos, segurança, etc.)
+- `frontend`: código React/Next.js com as páginas e componentes
+- `frontend/lib/api.ts`: cliente HTTP para a API
+
+## Documentação de API (Swagger)
+
+Após iniciar o back-end, abra `http://localhost:8080/swagger-ui/index.html` para
+explorar todos os endpoints (autenticação, jogadores, times, torneios...).
+
+## Observações
+
+- Todos os dados são mantidos em memória (H2 e listas internas); reiniciar a
+  aplicação apaga os registros. Use `DataLoader` ou as rotas POST para criar
+  dados de exemplo.
+- CORS está configurado para `http://localhost:3000`.
 
 ---
 
-**Status:** Backend completo ✅ | API REST ✅ | Frontend 40% 🚧
+_Apresentação e documentação criadas automaticamente por gitHub Copilot AI durante
+o desenvolvimento do projeto._
