@@ -1,96 +1,94 @@
-## Testes
+# 🎮 Arena Nexus
 
-O projeto contém alguns testes básicos do backend que garantem que o contexto do
-Spring carrega e que as rotas de `jogadores` e `times` retornam OK. Para executar
-os testes basta rodar:
+**Arena Nexus** é um sistema robusto de gerenciamento de torneios de e-sports, desenvolvido com uma arquitetura full‑stack moderna, utilizando **Java/Spring Boot** no back‑end e **Next.js/TypeScript** no front‑end.
+
+A aplicação conta com autenticação segura via JWT, ranking de jogadores, gestão de times, organização de torneios e um protótipo funcional de fila de matchmaking.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### **Back-end**
+* **Java 17** & **Spring Boot 3.2** 🍃
+* **Spring Security** (Autenticação JWT) 🔐
+* **Spring Data JPA** (Persistência de dados)
+* **H2 Database** (Desenvolvimento em memória) / MySQL Driver 🗄️
+* **Springdoc OpenAPI** (Documentação Swagger) 📝
+* **Lombok** (Produtividade e código limpo)
+
+### **Front-end**
+* **React 18** & **Next.js 14** (App Router) ⚛️
+* **TypeScript** 📘
+* **Tailwind CSS** (Estilização) 🎨
+* **Framer Motion** (Animações fluidas) ✨
+* **Lucide React** (Ícones) 🧩
+* **React Query** (Tanstack) para gerenciamento de cache 🔄
+
+---
+
+## 🚀 Como Executar o Projeto
+
+Para rodar a aplicação completa, você precisará de dois terminais abertos:
+
+### 1️⃣ Back-end (API)
+Na raiz do repositório, execute:
+
+```powershell
+mvn spring-boot:run
+```
+
+Servidor: [http://localhost:8080](http://localhost:8080)
+
+Console H2: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+
+### 2️⃣ Front-end (Interface)
+Navegue até a pasta do front-end e inicie o servidor de desenvolvimento:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Interface: [http://localhost:3000](http://localhost:3000)
+
+💡 Dica: Se o front-end exibir erros de conexão, verifique a variável NEXT_PUBLIC_API_URL no arquivo frontend/.env.local.
+
+---
+
+## 🕹️ Fluxo Básico de Uso
+- **Cadastro**: Crie um novo jogador ou use as contas de teste:
+  - 👤 Usuário: `aspas` | Senha: `senha123`
+  - 👤 Usuário: `Less` | Senha: `senha123`
+- **Login**: O sistema retorna um JWT que é gravado em cookie e localStorage.
+- **Navegação**: Utilize o menu para acessar as áreas de `/rankings`, `/times`, `/torneios` e `/matchmaking`.
+- **API**: Explore os endpoints REST sob o prefixo `/api/*`.
+
+---
+
+## 📂 Estrutura de Pastas
+- `src/main/java/com/arena`: Código-fonte Java (controllers, modelos, segurança, etc.).
+- `frontend/`: Código React/Next.js (páginas, componentes e hooks).
+- `frontend/lib/api.ts`: Cliente HTTP centralizado para chamadas à API.
+
+---
+
+## 🧪 Testes
+O projeto inclui testes automatizados para o back-end que validam o carregamento do contexto e as rotas principais. Para executá-los:
 
 ```powershell
 mvn test
 ```
 
-Os resultados aparecem na saída e o Maven exibirá `BUILD SUCCESS` quando todos
-passarem (atualmente são 3 testes simples).
+---
 
-## Documentação de API (Swagger)
+## 📖 Documentação da API (Swagger)
+Com o back-end em execução, acesse a documentação interativa para testar todos os endpoints (jogadores, times, torneios, etc.):
 
-Após iniciar o back-end, abra `http://localhost:8080/swagger-ui/index.html` para
-explorar todos os endpoints (autenticação, jogadores, times, torneios...). A UI
-é gerada automaticamente pelo `springdoc-openapi` que já está incluído no
-`pom.xml`.
-# Arena Nexus
-
-Arena Nexus é um sistema de gerenciamento de torneios de e-sports, desenvolvido
-como projeto full‑stack com **Java/Spring Boot** no back‑end e **Next.js/TypeScript**
-no front‑end. A aplicação mantém autenticação via JWT, ranking de jogadores,
-times, torneios e um protótipo de fila de matchmaking.
-
-## Tecnologias
-
-- Java 17
-- Spring Boot 3.2
-  - Web MVC, Data JPA (com H2 em memória), Validation, Security
-  - Springdoc OpenAPI para documentação Swagger
-- Lombok (geração automatizada de getters/setters)
-- H2 Database (desenvolvimento) / MySQL driver
-- React 18 / Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS, Framer Motion, Lucide para ícones
-- React Query (tanstack) para cache de dados
-
-## Como rodar
-
-Abra dois terminais:
-
-1. **Back-end** (na raiz do repositório):
-
-	```powershell
-	mvn spring-boot:run
-	```
-
-	O servidor inicializa em `http://localhost:8080` e disponibiliza o console H2
-	em `http://localhost:8080/h2-console`.
-
-2. **Front-end**:
-
-	```powershell
-	cd frontend
-	npm install      # se ainda não tiver instalado
-	npm run dev
-	```
-
-	O site ficará disponível em `http://localhost:3000`.
-
-> Se a API não estiver disponível o front exibirá erros como "Failed to fetch"
-> no console. Verifique a variável `NEXT_PUBLIC_API_URL` em
-> `frontend/.env.local` ou veja o log `[api] base URL:` no console do navegador.
-
-## Fluxo básico
-
-1. Cadastre um jogador ou use as contas de teste (`aspas`/`senha123`, `Less`/`senha123`).
-2. Faça login; o sistema retorna um JWT que é gravado em cookie e localStorage.
-3. Navegue pelo menu em `/rankings`, `/times`, `/torneios` e `/matchmaking`.
-4. A API expõe endpoints REST sob `/api/*`; veja a documentação Swagger em
-	`http://localhost:8080/swagger-ui/index.html`.
-
-## Estrutura de pastas
-
-- `src/main/java/com/arena`: código Java (controllers, modelos, segurança, etc.)
-- `frontend`: código React/Next.js com as páginas e componentes
-- `frontend/lib/api.ts`: cliente HTTP para a API
-
-## Documentação de API (Swagger)
-
-Após iniciar o back-end, abra `http://localhost:8080/swagger-ui/index.html` para
-explorar todos os endpoints (autenticação, jogadores, times, torneios...).
-
-## Observações
-
-- Todos os dados são mantidos em memória (H2 e listas internas); reiniciar a
-  aplicação apaga os registros. Use `DataLoader` ou as rotas POST para criar
-  dados de exemplo.
-- CORS está configurado para `http://localhost:3000`.
+👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ---
 
-_Apresentação e documentação criadas automaticamente por gitHub Copilot AI durante
-o desenvolvimento do projeto._
+## ⚠️ Observações
+- **Persistência**: Os dados são mantidos em memória (H2). Reiniciar a aplicação apagará todos os registros. Utilize o DataLoader ou as rotas POST para criar dados iniciais.
+- **CORS**: A API está configurada para aceitar requisições de [http://localhost:3000](http://localhost:3000).
